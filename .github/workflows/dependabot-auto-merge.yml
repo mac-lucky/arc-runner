@@ -1,18 +1,21 @@
-name: Dependabot Auto-Merge
+name: Dependabot Auto Merge
 
 on:
-  pull_request:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  actions: write
+  checks: read
+  contents: write
+  pull-requests: write
+  workflows: write
+  statuses: read
 
 jobs:
   auto-merge:
     uses: mac-lucky/actions-shared-workflows/.github/workflows/dependabot-auto-merge-reusable.yml@master
-    permissions:
-      contents: write
-      pull-requests: write
-      actions: write
-      workflows: write
-      checks: read
-      statuses: read
     with:
       code_analysis_check_name: "build"
       container_test_check_name: ""
+    secrets: inherit
